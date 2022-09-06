@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSV File Conversion</title>
+</head>
+
+<body>
+    <style>
+        body {
+            margin: 0;
+            background: #000;
+        }
+
+        .heading {
+
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+            font-size: 3em;
+        }
+
+        .btn {
+            display: flex;
+            background-color: rgb(49, 49, 49);
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            border: none;
+            cursor: pointer;
+            border-radius: 15px;
+            margin: 0 auto;
+            border: 4px solid white;
+            font-size: 2em;
+        }
+
+        .btn:hover {
+            background-color: #fff;
+            color: #000;
+        }
+
+        #display {
+            margin: 0 auto;
+            margin-top: 20px;
+            width: 50%;
+            padding: 20px;
+            background-color: rgb(49, 49, 49);
+            color: #fff;
+            border-radius: 15px;
+            border: 4px solid white;
+        }
+    </style>
+    <h1 class="heading">Click the Button to input your CSV Data</h1>
+    <button class="btn" onclick="myFunction()">Click Here</button>
+    <div id="display" style="display: none">
+        <h2>Your Formatted CSV Data</h2>
+        <p id="data"></p>
+
+    </div>
+    <!-- <p id="display"></p> -->
+
+    <script>
+        function myFunction() {
+            let data = prompt("Enter your CSV Data",
+                '"Patient Name","SSN","Age","Phone Number","Status","Prescott, Zeke","542-51-6641",21,"801-555-2134","Opratory=2,PCP=1","Goldstein, Bucky","635-45-1254",42,"435-555-1541","Opratory=1,PCP=1","Vox, Bono","414-45-1475",51,"801-555-2100","Opratory=3,PCP=2"'
+            );
+
+            console.log(`Before: ${data}`);
+            if (data != null) {
+
+                for (let i = 0; i < data.length; i++) {
+
+                    // if (data[i] == ",21,") {
+                    //     console.log(`Found: ${data[i]}`);
+                    //     data = data.replace(data[i], '[comma]');
+                    // }
+
+                    if (data[i] = '",') {
+                        data = data.replace('",', "] ");
+                    }
+
+                    if (data[i] == '"') {
+                        data = data.replace('"', "[");
+                    }
+                }
+
+
+                const lastItem = data.slice(0, -1);
+                let editedItem = lastItem + "]";
+
+                console.log(`Before: ${editedItem}`);
+
+                for (let i = 0; i < editedItem.length; i++) {
+                    console.log(`editedItem[i]: ${editedItem[i]}`);
+                    console.log(`Typeof editedItem[i]: ${typeof(editedItem[i])}`);
+                }
+
+                console.log(`After: ${editedItem}`);
+
+                console.log(`This is the new data: ${editedItem}`);
+
+                var T = document.getElementById("display");
+
+                if (T.style.display == "") {
+                    T.style.display = "none";
+                } else {
+                    T.style.display = "";
+                }
+
+                document.getElementById("data").innerHTML = editedItem;
+
+            }
+
+        }
+    </script>
+</body>
+
+</html>
