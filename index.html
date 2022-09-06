@@ -56,52 +56,56 @@
     <h1 class="heading">Click the Button to input your CSV Data</h1>
     <button class="btn" onclick="myFunction()">Click Here</button>
     <div id="display" style="display: none">
-        <h2>Your Formatted CSV Data</h2>
+        <h2>Your CSV Data</h2>
         <p id="data"></p>
+        <h2>Your Formatted CSV Data</h2>
+        <p id="formattedData"></p>
 
     </div>
-    <!-- <p id="display"></p> -->
 
     <script>
         function myFunction() {
+            // grab the data from the user
             let data = prompt("Enter your CSV Data",
                 '"Patient Name","SSN","Age","Phone Number","Status","Prescott, Zeke","542-51-6641",21,"801-555-2134","Opratory=2,PCP=1","Goldstein, Bucky","635-45-1254",42,"435-555-1541","Opratory=1,PCP=1","Vox, Bono","414-45-1475",51,"801-555-2100","Opratory=3,PCP=2"'
             );
 
-            console.log(`Before: ${data}`);
+            // store the data for later
+            document.getElementById("data").innerHTML = data;
+
+
+            // as long as the data is not empty
             if (data != null) {
 
+                // run a for loop over all the data
                 for (let i = 0; i < data.length; i++) {
 
-                    // if (data[i] == ",21,") {
-                    //     console.log(`Found: ${data[i]}`);
-                    //     data = data.replace(data[i], '[comma]');
-                    // }
-
+                    // if the data has a quote and a comma we are going to add a ending bracket and space
                     if (data[i] = '",') {
                         data = data.replace('",', "] ");
                     }
 
+                    // if the data has a quote we are going to add a beginning bracket
                     if (data[i] == '"') {
                         data = data.replace('"', "[");
                     }
+
                 }
 
-
+                // grab the last item in the data
                 const lastItem = data.slice(0, -1);
+                // change the beginning bracket for an ending one
                 let editedItem = lastItem + "]";
 
-                console.log(`Before: ${editedItem}`);
-
                 for (let i = 0; i < editedItem.length; i++) {
-                    console.log(`editedItem[i]: ${editedItem[i]}`);
-                    console.log(`Typeof editedItem[i]: ${typeof(editedItem[i])}`);
+                    // if the data has a quote and a comma we are going to add a ending bracket and space
+                    if (editedItem[i] = ',') {
+                        editedItem = editedItem.replace(',', "] ");
+                    }
+
                 }
 
-                console.log(`After: ${editedItem}`);
-
-                console.log(`This is the new data: ${editedItem}`);
-
+                // these lines are for displaying the data after the button is clicked
                 var T = document.getElementById("display");
 
                 if (T.style.display == "") {
@@ -110,7 +114,8 @@
                     T.style.display = "";
                 }
 
-                document.getElementById("data").innerHTML = editedItem;
+
+                document.getElementById("formattedData").innerHTML = editedItem;
 
             }
 
